@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/new/sound">
+        <file>signal.mp3</file>
+    </qresource>
+</RCC>
