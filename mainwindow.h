@@ -32,6 +32,7 @@ private slots:
     void onSokReadyRead();
     void onSokDisplayError(QAbstractSocket::SocketError socketError);
 private:
+
     Ui::MainWindow *ui;
     QTcpSocket *sock;
     bool status;

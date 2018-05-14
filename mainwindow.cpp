@@ -8,7 +8,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     sock = new QTcpSocket(this);
     player = new QMediaPlayer;
-    player->setMedia(QUrl("qrc:/new/sound/signal.mp3"));
+    player->setMedia(QUrl("qrc:/new/sound/03281.mp3"));
     player->setVolume(100);
     msgBox = new QMessageBox;
 
@@ -17,9 +17,6 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(sock, SIGNAL(connected()), this, SLOT(onSokConnected()));
     connect(sock, SIGNAL(disconnected()), this, SLOT(onSokDisconnected()));
     connect(sock, SIGNAL(error(QAbstractSocket::SocketError)),this, SLOT(onSokDisplayError(QAbstractSocket::SocketError)));
-
-
-
 
     onSockConnect();
 //    loop();
@@ -38,7 +35,8 @@ void MainWindow::onSockConnect()
 void MainWindow::onSokConnected()
 {
     sock->write("Reade");
-    ui->label->setText("connect online");
+    QString str = ui->label->text();
+    ui->label->setText("Статус: <font color=Green>Online");
 }
 
 void MainWindow::onSokReadyRead()
@@ -52,11 +50,13 @@ void MainWindow::onSokReadyRead()
        mes = true;
        player->play();
        msgBox->setText("Внимание");
-       msgBox->setInformativeText("На сервер пришло уведомление");
+       msgBox->setIcon(QMessageBox::Critical);
+       msgBox->setWindowTitle("Сообщение");
+       msgBox->setInformativeText("На сервер пришло уведомление                   Проверти \"Скаут-Студия\"");
        msgBox->setStandardButtons(QMessageBox::Ok);
        msgBox->setDefaultButton(QMessageBox::Ok);
        int ret = msgBox->exec();
-       ui->label_2->setText("itswork");
+       ui->label_2->setText("Получин сигнал");
 
        if (ret == QMessageBox::Ok){
            player->stop();
