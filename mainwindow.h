@@ -9,6 +9,8 @@
 #include <QMediaPlayer>
 #include <QUrl>
 #include <QMessageBox>
+#include <QMenu>
+#include <QSystemTrayIcon>
 
 
 
@@ -31,6 +33,12 @@ private slots:
     void onSokDisconnected();
     void onSokReadyRead();
     void onSokDisplayError(QAbstractSocket::SocketError socketError);
+//    Слоты для тейя
+    void changeEvent(QEvent*);
+    void trayIconActivated(QSystemTrayIcon::ActivationReason reason);
+    void trayActionExecute();
+    void setTrayIconActions();
+    void showTrayIcon();
 private:
 
     Ui::MainWindow *ui;
@@ -39,6 +47,12 @@ private:
     QMediaPlayer *player;
     QMessageBox *msgBox;
     bool mes=false;
+//    Переменный трей
+    QMenu *trayIconMenu;
+    QAction *minimizeAction;
+    QAction *restoreAction;
+    QAction *quitAction;
+    QSystemTrayIcon *trayIcon;
 };
 
 #endif // MAINWINDOW_H
